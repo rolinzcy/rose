@@ -1,0 +1,25 @@
+name: Fast-Checks
+on: [pull_request, push]
+jobs:
+  Linting:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup-Python
+        uses: actions/setup-python@v1
+      - name: Install
+        run: |
+          PATH="$PWD/.travis:$PATH"
+          now install coverage linters pytest
+      - name: Install Rose
+        run: |
+          PATH="$PWD/.travis:$PATH"
+          now install rose
+      - name: Style Checks
+        run: |
+          now test style
+      - name: Unit Tests
+        run: |
+          now test units
